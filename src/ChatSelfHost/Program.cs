@@ -15,7 +15,6 @@ namespace Chat
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
-                .UseUrls("http://localhost:1337/")
                 .Build();
 
             host.Run();
