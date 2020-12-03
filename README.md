@@ -59,21 +59,21 @@ Clients can apply any of the above methods to all users, a specified user or jus
   - **Efficient** - Each client uses a single TCP connection and each message avoids the overhead of HTTP Connections and Headers that's [often faster than Web Sockets](http://matthiasnehlsen.com/blog/2013/05/01/server-sent-events-vs-websockets/).
   - **Resilient** - Browsers automatically detect when a connection is broken and automatically reconnects
   - **Interoperable** - As it's just plain-old HTTP, it's introspectable with your favorite HTTP Tools and even works through HTTP proxies (with buffering and checked-encoding turned off).
-  - **Well Supported** - As a Web Standard it's supported in all major browsers except for IE which [can be enabled with polyfills](http://html5doctor.com/server-sent-events/#yaffle) - see [default_ieshim.cshtml](https://github.com/ServiceStackApps/Chat/blob/master/src/Chat/default_ieshim.cshtml) and its [Live Chat Example](http://chat.servicestack.net/default_ieshim).
+  - **Well Supported** - As a Web Standard it's supported in all major browsers except for IE which [can be enabled with polyfills](http://html5doctor.com/server-sent-events/#yaffle).
 
 ### Server Event Clients
 
-  - [JavaScript Client](http://docs.servicestack.net/javascript-server-events-client)
-  - [C# Client](http://docs.servicestack.net/csharp-server-events-client)
+  - [JavaScript Client](https://docs.servicestack.net/javascript-server-events-client)
+  - [C# Client](https://docs.servicestack.net/csharp-server-events-client)
 
 ### Server Event Providers
 
   - Memory Server Events (default)
-  - [Redis Server Events](http://docs.servicestack.net/redis-server-events)
+  - [Redis Server Events](https://docs.servicestack.net/redis-server-events)
 
 ### Registering
 
-List most other [modular functionality](http://docs.servicestack.net/plugins) in ServiceStack, Server Sent Events is encapsulated in a single Plugin that can be registered in your AppHost with:
+List most other [modular functionality](https://docs.servicestack.net/plugins) in ServiceStack, Server Sent Events is encapsulated in a single Plugin that can be registered in your AppHost with:
 
 ```csharp
 Plugins.Add(new ServerEventsFeature());
@@ -115,7 +115,7 @@ class ServerEventsFeature
 
 The way your Services send notifications is via the `IServerEvents` API which currently only has an in-memory `MemoryServerEvents` implementation which keeps a record of all subscriptions and connections in memory:
 
-> Server Events can also be configured to use a [distributed Redis backend](http://docs.servicestack.net/redis-server-events) which allows Server Events to work across load-balanced app servers.
+> Server Events can also be configured to use a [distributed Redis backend](https://docs.servicestack.net/redis-server-events) which allows Server Events to work across load-balanced app servers.
 
 ```csharp
 public interface IServerEvents : IDisposable
@@ -156,7 +156,7 @@ public interface IServerEvents : IDisposable
 }
 ```
 
-The API's your Services predominantly deal with are the **External API's** which allow sending of messages at different levels of granularity. As Server Events have deep integration with ServiceStack's [Sessions](http://docs.servicestack.net/sessions) and [Authentication Providers](http://docs.servicestack.net/authentication-and-authorization) you're also able to notify specific users by either:
+The API's your Services predominantly deal with are the **External API's** which allow sending of messages at different levels of granularity. As Server Events have deep integration with ServiceStack's [Sessions](https://docs.servicestack.net/sessions) and [Authentication Providers](https://docs.servicestack.net/authentication-and-authorization) you're also able to notify specific users by either:
 
 ```csharp
 NotifyUserId()   // UserAuthId

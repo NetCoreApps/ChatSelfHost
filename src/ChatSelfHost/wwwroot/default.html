@@ -4,7 +4,7 @@
     <title>ServiceStack Chat</title>
     <link href="/img/favicon.png" rel="icon">
     <link href="/default.css" rel="stylesheet" />
-    <script src="/jquery-2.1.1.min.js"></script>
+    <script src="/jquery.min.js"></script>
     <script src="/js/ss-utils.js"></script>
     <style>
         body {
@@ -14,7 +14,7 @@
 </head>
 <body>
     <div id="top">
-        <a href="https://github.com/ServiceStackApps/LiveDemos">
+        <a href="https://github.com/NetCoreApps/LiveDemos">
             <img src="https://raw.githubusercontent.com/ServiceStack/Assets/master/img/artwork/logo-32-inverted.png" style="height:28px; padding: 10px 0 0 0" />
         </a>
         <div id="social">
@@ -100,7 +100,7 @@
                 usersMap = {};
                 $.map(users, function (user) { usersMap[user.userId] = user; });
                 $("#users").html($.map(channels, function (c) {
-                    var usersInChannel = $.grep($.map(usersMap, function (u) { return u; }), function (u) { return u.channels.split(',').indexOf(c) >= 0; });
+                    var usersInChannel = $.grep($.map(usersMap,function(u){return u;}), function (u) { return u.channels.split(',').indexOf(c) >= 0; });
                     return '<div class="channel" data-channel="' + c + '">'
                         + $.map(usersInChannel, function (u) { return createUser(u); }).join('')
                         + '</div>';
@@ -118,7 +118,7 @@
                     $("#welcome").html('<span>Welcome, ' + u.displayName + '</span>' + '<img src="' + u.profileUrl + '"/>');
                     $("#logs .channel").html("");
                     addEntry({ msg: "CONNECTED!", cls: "open" });
-                    $.getJSON("/chathistory?channels=" + channelStr, function (r) {
+                    $.getJSON("/chathistory?channels=@channels", function (r) {
                         $.map(r.results, $.ss.handlers["chat"]);
                     });
                     refreshUsers();
@@ -204,8 +204,11 @@
                 user + time + "<div>" + o.msg + "</div>" + "</div>").scrollTop(1E10);
         }
         function createUser(user) {
-            return "<div class='user u_" + user.userId + "'><img src='" + (user.profileUrl || "/img/no-profile64.png") + "'/><span data-id='" +
-                user.userId + "' data-click='privateMsg'>" + user.displayName + "</span></div>";
+            var img = '<img src="' + (user.profileUrl || "/img/no-profile64.png") + '">';
+            var to = '<div class="user u_' + user.userId + '">' + img + '<span data-id="' +
+                user.userId + '" data-click="privateMsg">' + user.displayName + '</span></div>';
+
+            return to;
         }
 
         var msgHistory = [], historyIndex = -1;
